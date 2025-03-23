@@ -1,12 +1,29 @@
 import cors from 'cors'
+import * as helper from '../common/helper'
+import * as env from '../config/env.config'
+import * as logger from '../common/logger'
 
-// In a production environment, you would want to restrict this to specific domains
-// For test deployment, we'll allow all origins to simplify troubleshooting
+const whitelist = [
+  helper.trimEnd(env.BACKEND_HOST, '/'),
+  helper.trimEnd(env.FRONTEND_HOST, '/'),
+]
+
+/**
+ * CORS configuration.
+ *
+ * @type {cors.CorsOptions}
+ */
 const CORS_CONFIG: cors.CorsOptions = {
-  origin: '*', // Allow all origins for testing
+  origin(origin, callback) {
+    if (!origin || whitelist.indexOf(helper.trimEnd(origin, '/')) !== -1) {
+      callback(null, true)
+    } else {
+      const message = `Not allowed by CORS: ${origin}`
+      logger.error(message)
+      callback(new Error(message))
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'x-access-token'],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 

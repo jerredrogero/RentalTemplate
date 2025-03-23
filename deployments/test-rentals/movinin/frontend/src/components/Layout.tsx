@@ -6,7 +6,6 @@ import * as UserService from '@/services/UserService'
 import * as helper from '@/common/helper'
 import { useAnalytics } from '@/common/useAnalytics'
 import { useUserContext, UserContextType } from '@/context/UserContext'
-import env from '@/config/env.config'
 
 interface LayoutProps {
   strict?: boolean
@@ -24,12 +23,8 @@ const Layout = ({
   const { user, userLoaded } = useUserContext() as UserContextType
   const [loading, setLoading] = useState(true)
 
-  // Debug information
-  console.log('Layout state:', { user, userLoaded, loading, strict })
-
   useEffect(() => {
     if (userLoaded) {
-      console.log('User loaded:', user ? 'authenticated' : 'not authenticated', 'strict:', strict)
       if (!user && strict) {
         // UserService.signout(false, true)
         UserService.signout(true, false)
@@ -63,28 +58,20 @@ const Layout = ({
   }
 
   return (
-    <div className="main-layout">
-      <div className="content">
-        {!env.isProduction && (
-          <div style={{ padding: '8px', backgroundColor: '#e0f7e0', color: 'black', position: 'fixed', top: '10px', right: '10px', zIndex: 9999, fontSize: '12px', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-            Debug: {loading ? 'Loading...' : (user ? 'User authenticated' : 'User NOT authenticated')}
+    <>
+      {(!user && !loading) || (user && user.verified) ? (
+        <div className="content">{children}</div>
+      ) : (
+        !loading && (
+          <div className="validate-email">
+            <span>{strings.VALIDATE_EMAIL}</span>
+            <Button type="button" variant="contained" className="btn-primary btn-resend" onClick={handleResend}>
+              {strings.RESEND}
+            </Button>
           </div>
-        )}
-
-        {(!user && !loading) || (user && user.verified) ? (
-          children
-        ) : (
-          !loading && (
-            <div className="validate-email">
-              <span>{strings.VALIDATE_EMAIL}</span>
-              <Button type="button" variant="contained" className="btn-primary btn-resend" onClick={handleResend}>
-                {strings.RESEND}
-              </Button>
-            </div>
-          )
-        )}
-      </div>
-    </div>
+        )
+      )}
+    </>
   )
 }
 

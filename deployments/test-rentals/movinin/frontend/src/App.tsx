@@ -14,27 +14,6 @@ if (env.GOOGLE_ANALYTICS_ENABLED) {
   initGA()
 }
 
-// Add console logs to troubleshoot static file loading and environment issues
-console.log('App initializing...');
-console.log('Environment variables:', {
-  API_HOST: import.meta.env.VITE_MI_API_HOST,
-  isProduction: import.meta.env.PROD,
-  BASE_URL: import.meta.env.BASE_URL,
-});
-
-try {
-  // Test if static files can be loaded
-  const testImageLoad = () => {
-    const img = new Image();
-    img.onload = () => console.log('Static image loaded successfully');
-    img.onerror = (e) => console.error('Failed to load static image:', e);
-    img.src = `${import.meta.env.BASE_URL}cover.webp`;
-  };
-  testImageLoad();
-} catch (e) {
-  console.error('Error testing static assets:', e);
-}
-
 const Header = lazy(() => import('@/components/Header'))
 const SignIn = lazy(() => import('@/pages/SignIn'))
 const SignUp = lazy(() => import('@/pages/SignUp'))
