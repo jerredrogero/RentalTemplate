@@ -1,17 +1,17 @@
 import cors from 'cors'
 
 /**
- * CORS configuration with permissive settings for development/testing.
- * In a production environment, you would want to restrict this.
- *
- * @type {cors.CorsOptions}
+ * CORS configuration.
+ * 
+ * Simplified to allow all origins for deployment troubleshooting
  */
 const CORS_CONFIG: cors.CorsOptions = {
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'x-access-token'],
   credentials: true,
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }
 
 /**
