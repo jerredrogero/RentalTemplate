@@ -22,20 +22,29 @@ import * as helper from './common/helper'
 
 const app = express()
 
-app.use(helmet.contentSecurityPolicy())
-app.use(helmet.dnsPrefetchControl())
-app.use(helmet.crossOriginEmbedderPolicy())
-app.use(helmet.frameguard())
-app.use(helmet.hidePoweredBy())
-app.use(helmet.hsts())
-app.use(helmet.ieNoOpen())
-app.use(helmet.noSniff())
-app.use(helmet.permittedCrossDomainPolicies())
-app.use(helmet.referrerPolicy())
-app.use(helmet.xssFilter())
-app.use(helmet.originAgentCluster())
-app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
-app.use(helmet.crossOriginOpenerPolicy())
+// Middleware to add CORS headers explicitly for all routes
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, x-access-token');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  
+  return next();
+});
+
+// Configure Helmet to be less restrictive for CORS
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+    crossOriginResourcePolicy: false
+  })
+);
 
 app.use(nocache())
 app.use(compression({ threshold: 0 }))
