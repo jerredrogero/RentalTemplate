@@ -1,13 +1,13 @@
 .content {
-  display: flex !important;
-  flex-direction: column !important;
-  flex-grow: 1 !important;
-  position: relative !important;
-  overflow: auto !important;
-  z-index: 10 !important;
-  min-height: 100vh !important;
-  width: calc(100% - 250px) !important;
-  margin-left: 250px !important;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  overflow: auto;
+  z-index: 1;
+  min-height: 100vh;
+  width: calc(100% - 250px);
+  margin-left: 250px;
 }
 
 /* Main content container should be visible */
@@ -16,12 +16,17 @@
   overflow: auto;
 }
 
-/* Debug styles */
-.force-visible {
-  position: relative !important;
-  z-index: 1000 !important;
-  background-color: white !important;
-  padding: 20px !important;
-  margin: 20px !important;
-  border: 3px solid red !important;
+/* Home page specific styles */
+.home-container {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  margin: 20px;
+}
+
+@media (max-width: 960px) {
+  .content {
+    width: 100%;
+    margin-left: 0;
+  }
 } 
