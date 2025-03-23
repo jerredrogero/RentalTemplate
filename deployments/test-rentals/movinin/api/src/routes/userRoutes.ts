@@ -73,7 +73,10 @@ routes.route('/api/test-login').post(async (req, res) => {
       }
     });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ 
+      success: false, 
+      message: error instanceof Error ? error.message : 'An unknown error occurred' 
+    });
   }
 });
 
