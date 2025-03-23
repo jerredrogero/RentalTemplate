@@ -1,7 +1,4 @@
 import cors from 'cors'
-import * as helper from '../common/helper'
-import * as env from '../config/env.config'
-import * as logger from '../common/logger'
 
 // In a production environment, you would want to restrict this to specific domains
 // For test deployment, we'll allow all origins to simplify troubleshooting
