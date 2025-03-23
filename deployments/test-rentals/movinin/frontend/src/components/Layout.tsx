@@ -62,26 +62,17 @@ const Layout = ({
   }
 
   return (
-    <>
-      {(!user && !loading) || (user && user.verified) ? (
-        <div className="content">
-          {/* Debug rendering info */}
-          <div style={{ padding: '10px', background: '#f2f2f2', display: 'none' }}>
-            Layout Debug: Rendering {user ? 'authenticated' : 'unauthenticated'} content
-          </div>
+    <div className="main-layout">
+      <div className="content">
+        <div style={{ padding: '10px', backgroundColor: 'lime', color: 'black', position: 'fixed', top: '10px', right: '10px', zIndex: 9999 }}>
+          Layout Debug: {loading ? 'Loading...' : (user ? 'User authenticated' : 'User NOT authenticated')}
+        </div>
+        <div className="force-visible">
+          <h1>EMERGENCY DEBUG: THIS SHOULD BE VISIBLE</h1>
           {children}
         </div>
-      ) : (
-        !loading && (
-          <div className="validate-email">
-            <span>{strings.VALIDATE_EMAIL}</span>
-            <Button type="button" variant="contained" className="btn-primary btn-resend" onClick={handleResend}>
-              {strings.RESEND}
-            </Button>
-          </div>
-        )
-      )}
-    </>
+      </div>
+    </div>
   )
 }
 
