@@ -47,6 +47,27 @@ app.options('*', cors())
 app.use(cookieParser(env.COOKIE_SECRET))
 app.use(allowedMethods)
 
+// Add a simple health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    env: {
+      backend_host: env.BACKEND_HOST,
+      frontend_host: env.FRONTEND_HOST
+    }
+  });
+});
+
+// Add a root path handler
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Test Rentals API is running',
+    version: '1.0.0',
+    documentation: '/api-docs'
+  });
+});
+
 // Add test endpoint
 app.post('/api/test-auth', async (req, res) => {
   try {
@@ -86,7 +107,10 @@ app.post('/api/test-auth', async (req, res) => {
     });
   } catch (error) {
     console.error('Test auth error:', error);
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ 
+      success: false, 
+      message: error instanceof Error ? error.message : 'An unknown error occurred' 
+    });
   }
 });
 

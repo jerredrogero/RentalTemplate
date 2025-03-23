@@ -43,10 +43,11 @@ export const WEBSITE_NAME = __env__('MI_WEBSITE_NAME', false, "Movin' In")
 
 /**
  * Server Port. Default is 4004.
+ * For Render.com, we must use the PORT environment variable they provide.
  *
  * @type {number}
  */
-export const PORT = Number.parseInt(__env__('MI_PORT', false, '4004'), 10)
+export const PORT = Number.parseInt(process.env.PORT || __env__('MI_PORT', false, '4004'), 10)
 
 /**
  * Indicate whether HTTPS is enabled or not.
