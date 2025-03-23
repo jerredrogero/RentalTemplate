@@ -22,6 +22,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [userLoaded, setUserLoaded] = useState(false)
   const value = useMemo(() => ({ user, setUser, userLoaded, setUserLoaded }), [user, userLoaded])
 
+  // Add debug output
+  console.log('UserContext state:', { user, userLoaded })
+
   return (
     <UserContext.Provider value={value}>{children}</UserContext.Provider>
   )
