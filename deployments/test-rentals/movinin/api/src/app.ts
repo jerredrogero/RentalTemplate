@@ -5,6 +5,7 @@ import nocache from 'nocache'
 import cookieParser from 'cookie-parser'
 import i18n from './lang/i18n'
 import * as env from './config/env.config'
+import { __env__ } from './config/env.config'
 import cors from './middlewares/cors'
 import allowedMethods from './middlewares/allowedMethods'
 import agencyRoutes from './routes/agencyRoutes'
@@ -64,7 +65,7 @@ app.get('/api/settings', (req, res) => {
   res.status(200).json({
     language: env.DEFAULT_LANGUAGE,
     currency: 'USD',
-    company: env.COMPANY_NAME,
+    company: __env__('MI_COMPANY_NAME', false, 'Test Rental Company'),
     pagination: {
       enabled: true,
       size: 10
