@@ -1,0 +1,18 @@
+section.property-list .empty-list {
+  margin-top: 15px;
+  text-align: center;
+  width: 250px;
+}
+
+section.property-list {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (width >=500px) and (width <=960px) {
+  section.property-list {
+    max-width: 480px;
+  }
+}

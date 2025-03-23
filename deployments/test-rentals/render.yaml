@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: test-rentals-api
+    env: node
+    rootDir: movinin/api
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MI_DB_URI
+        value: mongodb+srv://jrogero578:Johnch10@rentaltemplate.cww9u.mongodb.net/test-rentals?retryWrites=true&w=majority&appName=RentalTemplate
+      - key: MI_CONTACT_EMAIL
+        value: test@rentals.com
+      - key: MI_COMPANY_NAME
+        value: Test Rental Company
+      - key: MI_BACKEND_HOST
+        value: https://test-rentals-backend.onrender.com/
+      - key: MI_FRONTEND_HOST
+        value: https://test-rentals-frontend.onrender.com/
+      - key: MI_JWT_SECRET
+        value: m0v1n1n
+      
+  - type: web
+    name: test-rentals-backend
+    env: node
+    rootDir: movinin/backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REACT_APP_API_HOST
+        value: https://test-rentals-api.onrender.com
+      
+  - type: web
+    name: test-rentals-frontend
+    env: node
+    rootDir: movinin/frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REACT_APP_API_HOST
+        value: https://test-rentals-api.onrender.com

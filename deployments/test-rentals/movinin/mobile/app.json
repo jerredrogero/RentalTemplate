@@ -1,0 +1,66 @@
+﻿{
+  "expo": {
+    "jsEngine": "hermes",
+    "name": "Movin' In",
+    "version": "5.2.0",
+    "slug": "movinin",
+    "icon": "./assets/icon.png",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "splash": {
+      "backgroundColor": "#0D63C9",
+      "image": "./assets/splash.png"
+    },
+    "android": {
+      "versionCode": 520,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png"
+      },
+      "icon": "./assets/icon.png",
+      "googleServicesFile": "./google-services.json",
+      "package": "com.movinin"
+    },
+    "ios": {
+      "buildNumber": "5.2.0",
+      "supportsTablet": true,
+      "icon": "./assets/icon.png",
+      "bundleIdentifier": "com.movinin"
+    },
+    "plugins": [
+      "expo-localization",
+      "./plugins/usesCleartextTraffic",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0D63C9",
+          "image": "./assets/icon.png",
+          "imageWidth": 200
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "MERCHANT_IDENTIFIER",
+          "enableGooglePay": true
+        }
+      ]
+    ],
+    "owner": "aelassas",
+    "extra": {
+      "eas": {
+        "projectId": "68f84550-e978-45b5-9de1-da514eb547fe"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/68f84550-e978-45b5-9de1-da514eb547fe"
+    },
+    "experiments": {
+      "tsconfigPaths": true
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
+  }
+}
+
