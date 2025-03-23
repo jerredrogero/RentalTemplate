@@ -9,6 +9,7 @@
     "install:dependencies": "cd ../packages/currency-converter && npm i --legacy-peer-deps && cd ../movinin-helper && npm i --legacy-peer-deps && cd ../../backend",
     "ts:build": "npm run install:dependencies && tsc --build --verbose",
     "build": "tsc vite.config.ts --skipLibCheck && npm run ts:build && cross-env NODE_OPTIONS=--max-old-space-size=1024 vite build",
+    "start": "npm i -g serve && serve -s build",
     "dev": "npm run ts:build && vite",
     "preview": "vite preview",
     "fix": "eslint --fix .",
