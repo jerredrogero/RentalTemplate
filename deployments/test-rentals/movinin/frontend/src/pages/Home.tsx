@@ -64,28 +64,40 @@ const Home = () => {
 
   return (
     <Layout onLoad={onLoad} strict={false}>
+      <div style={{ backgroundColor: 'yellow', padding: '10px', color: 'black', position: 'fixed', top: '70px', left: '10px', zIndex: 9999 }}>
+        Debug: Home Component Rendered
+        <br />
+        Countries: {countries.length}
+        <br />
+        Locations: {locations.length}
+      </div>
+
       <div className="home">
-
         <div className="home-content">
-
+          <div style={{ position: 'relative', zIndex: 10, padding: '20px', backgroundColor: 'rgba(255,255,255,0.8)', margin: '20px', borderRadius: '5px' }}>
+            <h1 style={{ color: '#000' }}>DEBUG: Home Content</h1>
+            <p style={{ color: '#000' }}>This should be visible regardless of other styling issues</p>
+          </div>
+          
           <div className="video">
-            <video
-              id="cover"
-              muted={!env.isSafari}
-              autoPlay={!env.isSafari}
-              loop
-              playsInline
-              disablePictureInPicture
-              onLoadedData={async () => {
-                setVideoLoaded(true)
-              }}
-            >
-              <source src="cover.mp4" type="video/mp4" />
-              <track kind="captions" />
-            </video>
-            {!videoLoaded && (
-              <div className="video-background" />
+            {/* Temporarily disable video for debugging */}
+            {false && (
+              <video
+                id="cover"
+                muted={!env.isSafari}
+                autoPlay={!env.isSafari}
+                loop
+                playsInline
+                disablePictureInPicture
+                onLoadedData={async () => {
+                  setVideoLoaded(true)
+                }}
+              >
+                <source src="cover.mp4" type="video/mp4" />
+                <track kind="captions" />
+              </video>
             )}
+            <div className="video-background" style={{ display: 'none' }} />
           </div>
 
           <div className="home-title">{strings.TITLE}</div>

@@ -55,29 +55,32 @@ div.home div.home-content::after {
   top: 0;
   left: 0;
   background: #321807;
-  opacity: 0.5;
+  opacity: 0.3;
   z-index: -1;
 }
 
-div.home-title {
-  color: #F7B644;
+div.home div.home-title,
+div.home div.home-cover,
+div.home div.home-subtitle {
+  color: white;
+  margin: 10px;
+  z-index: 1;
+  position: relative;
+  text-align: center;
+}
+
+div.home div.home-title {
   font-size: 28px;
   font-weight: 500;
-  text-align: center;
-  padding: 0 20px;
 }
 
 div.home div.home-cover {
   z-index: 2;
-  color: #fff;
-  text-align: center;
   -webkit-font-smoothing: antialiased;
   letter-spacing: .065rem;
-  padding: 0 20px;
 }
 
 div.home-subtitle {
-  color: #fff;
   font-size: 26px;
 }
 
