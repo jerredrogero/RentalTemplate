@@ -23,8 +23,12 @@ const Layout = ({
   const { user, userLoaded } = useUserContext() as UserContextType
   const [loading, setLoading] = useState(true)
 
+  // Debug information
+  console.log('Layout state:', { user, userLoaded, loading, strict })
+
   useEffect(() => {
     if (userLoaded) {
+      console.log('User loaded:', user ? 'authenticated' : 'not authenticated', 'strict:', strict)
       if (!user && strict) {
         // UserService.signout(false, true)
         UserService.signout(true, false)
@@ -60,7 +64,13 @@ const Layout = ({
   return (
     <>
       {(!user && !loading) || (user && user.verified) ? (
-        <div className="content">{children}</div>
+        <div className="content">
+          {/* Debug rendering info */}
+          <div style={{ padding: '10px', background: '#f2f2f2', display: 'none' }}>
+            Layout Debug: Rendering {user ? 'authenticated' : 'unauthenticated'} content
+          </div>
+          {children}
+        </div>
       ) : (
         !loading && (
           <div className="validate-email">

@@ -40,17 +40,25 @@ const Home = () => {
   }
 
   const onLoad = async () => {
-    const _countries = await CountryService.getCountriesWithLocations('', true, env.MIN_LOCATIONS)
-    setCountries(_countries)
-    const _locations = await LocationService.getLocationsWithPosition()
-    setLocations(_locations)
+    try {
+      console.log('Home: Loading countries and locations...')
+      const _countries = await CountryService.getCountriesWithLocations('', true, env.MIN_LOCATIONS)
+      console.log('Home: Countries loaded', _countries.length)
+      setCountries(_countries)
+      
+      const _locations = await LocationService.getLocationsWithPosition()
+      console.log('Home: Locations loaded', _locations.length)
+      setLocations(_locations)
 
-    const video = document.getElementById('cover') as HTMLVideoElement
-    if (video) {
-      video.muted = true
-      video.play()
-    } else {
-      console.error('Cover video tag not loaded')
+      const video = document.getElementById('cover') as HTMLVideoElement
+      if (video) {
+        video.muted = true
+        video.play()
+      } else {
+        console.error('Cover video tag not loaded')
+      }
+    } catch (error) {
+      console.error('Error loading home data:', error)
     }
   }
 
