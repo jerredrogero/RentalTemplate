@@ -65,7 +65,7 @@ const Layout = ({
   return (
     <div className="main-layout">
       <div className="content">
-        {env.DEVELOPMENT && (
+        {!env.isProduction && (
           <div style={{ padding: '8px', backgroundColor: '#e0f7e0', color: 'black', position: 'fixed', top: '10px', right: '10px', zIndex: 9999, fontSize: '12px', borderRadius: '4px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             Debug: {loading ? 'Loading...' : (user ? 'User authenticated' : 'User NOT authenticated')}
           </div>
